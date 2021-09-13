@@ -1,0 +1,83 @@
+package solver;
+    dialect "java"
+
+// import org.optaplanner.core.api.score.buildin.simple.SimpleScoreHolder;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+import basic.rueda.domain.*;
+import org.kie.api.runtime.*;
+
+import java.util.*;
+
+
+global HardSoftScoreHolder scoreHolder;
+global Integer counter;
+
+// ############################################################################
+// Hard constraints
+// ############################################################################
+rule "Initialize"
+salience 100
+when
+then
+       kcontext.getKieRuntime().setGlobal("counter", 1);
+       System.out.println("Inicitlaize: " + counter );
+end 
+
+rule "Testing Comments"
+when
+    // # this is a single line comment
+    // this is also a single line comment
+    
+then
+    // this is a comment inside a semantic code block
+    // # this is another comment in a semantic code block
+    System.out.println("HELLO RULE ALWAYS");
+end
+
+rule "Person"
+enabled false
+when
+    $p1 : Person(name in ("Edu", "Raul"))
+then
+    System.out.println("Person: " + $p1);
+    Object k = kcontext.getKieRuntime().getGlobal("counter");
+    // System.out.println("Object: " + k);
+    Integer value = 5; // NO SE PUEDE AÑADIR VALOR??!!! value = k + 5;
+    kcontext.getKieRuntime().setGlobal("counter", value);
+    System.out.println("Counter: " + counter);
+end
+
+/* CONTRAINTS RULES */
+/*
++==========+=========+=========+=========+=========+
+|          | Person1 | Person2 | Person3 | Person4 |
++==========+=========+=========+=========+=========+
+| Monday   |    X    |         |         |         |
++----------+---------+---------+---------+---------+
+| Tuesday  |         |    X    |         |         |
++----------+---------+---------+---------+---------+
+| Saturday |         |         |    X    |         |
++----------+---------+---------+---------+---------+
+| Thursday |         |         |         |    X    |
++----------+---------+---------+---------+---------+
+https://ozh.github.io/ascii-tables/
+*/
+
+rule "Horizontal conflict - More than a driver cant drive the same day"
+enabled true
+when
+then
+    System.out.println("------ HORIZONTAL CONFLICT ------");
+     scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+
+rule "Vertical conflict - A person cant drive more that once per week"
+enabled true
+when
+
+then
+
+    System.out.println("------ VERTICAL CONFLICT ------");
+     scoreHolder.addHardConstraintMatch(kcontext, -1);
+end

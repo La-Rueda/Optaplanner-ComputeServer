@@ -1,0 +1,6 @@
+<solver>
+    <scoreDirectorFactory>
+        <scoreDrl>solver/constraints.drl</scoreDrl>
+    </scoreDirectorFactory>
+    <constructionHeuristic/>
+</solver>

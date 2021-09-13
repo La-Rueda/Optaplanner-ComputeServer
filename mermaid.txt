@@ -1,0 +1,18 @@
+gantt
+    title A Gantt Diagram
+    dateFormat  YYYY-MM-DD
+    section Desarrollo
+    Estudio tecnologías a emplear           :a1,2021-03-01, 2d     
+    Creacion de proyectos base            :a1, 2021-03-03, 3d   
+    
+    Creacion arquitectura de front            :a1, 2021-03-06, 3d   
+            
+       
+    section Documentación
+    Preparación idea inicial           :d1, 2021-02-15, 10d   
+    Toma de requisitos              :d0, 2021-02-25, 4d   
+    Estudio librerias auxiliares           :a1, 2021-03-04, 30d
+    Planificación del proyecto           :a1, 2021-03-04, 14d
+    Objetivos del proyecto           :a1, 2021-03-04, 14d
+    Desarrollo propuesta TFG           :d2, 2021-04-10, 10d   
+    

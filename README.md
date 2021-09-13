@@ -1,1 +1,0 @@
-# Optaplanner-ComputeServer

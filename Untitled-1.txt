@@ -1,0 +1,24 @@
+
+
+
+{
+    username:
+
+    ruedas: [
+        {
+            id: 2348273
+            ruedaName:
+            calendar: [
+                {
+
+                }
+            ]
+        },
+        {
+            name: La Rueda
+        }
+        {
+            name: La Rueda
+        }
+    ]
+}
