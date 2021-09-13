@@ -63,17 +63,45 @@ end
 https://ozh.github.io/ascii-tables/
 */
 
-rule "Horizontal conflict - A person cant be in a car if reached capacity of car"
+//rule "Horizontal conflict - A person cant be in a car if reached capacity of car"
+//enabled true
+//when
+//    // Si capacidad del coche es menor que 2 p.e, penaliza.
+//    $c1: Car()
+//    $s1: SharedTrip($c1.capacity)
+//
+//    // Si cabe en el vehiculo
+//    if ( $s1.passengers.size() + 1 <= $c1.capacity ) do[addToVehicle]
+//then
+//    System.out.println("------ HORIZONTAL CONFLICT ------" + $c1);
+//     scoreHolder.addHardConstraintMatch(kcontext, -1);
+//
+//then[addToVehicle]
+////    $s1.getPassengers().add($s1.driver);
+//    System.out.println("Add" + $s1.driver + " to vehicle " + $c1 + " ------");
+//end
+
+rule "Add As passenger or horizontal conflict  - A person cant be in a car if reached capacity of car "
 enabled true
 when
-    // Si capacidad del coche es menor que 2 p.e, penaliza
+
     $c1: Car()
-    SharedTrip($c1.capacity == 2)
-//    s1: SharedTrip( $car: car == 2)
-//    $p1: Person()
+    $s1: SharedTrip($c1.capacity)
+    // Mejorar regla poniendo condicion aqui
 then
-    System.out.println("------ HORIZONTAL CONFLICT ------" + $c1);
-     scoreHolder.addHardConstraintMatch(kcontext, -1);
+
+ System.out.println("Size: " + $s1.getPassengers().size() );
+  System.out.println("Capacity: " + $c1.capacity);
+     // Si cabe en el coche p.e, penaliza.
+     // Capacidad sin contar al conductor
+    if ( $s1.getPassengers().size() < $c1.capacity - 1 ){
+         System.out.println("------ ADD PASSENGER ------");
+         System.out.println("New list" + $s1.getPassengers().add($s1.driver));
+        System.out.println("[ " + $c1 + "]Add " + $s1.driver + " as passenger" + $s1.getPassengers());
+    }else{
+        System.out.println($s1.driver + "No cabe en el coche");
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+    }
 end
 
 rule "Vertical conflict - A person cant be in two cars at the same time"

@@ -21,8 +21,8 @@ public class SharedTrip {
      @PlanningVariable(valueRangeProviderRefs = "carRange")
     public Car car;
 
-
-
+    private List<Person> passengers;
+    // ¿Por qué es necesario darle valor a sharedTripList?
 
     private SharedTrip() {
     }
