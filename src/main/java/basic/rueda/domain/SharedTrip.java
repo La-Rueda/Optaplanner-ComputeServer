@@ -16,15 +16,20 @@ public class SharedTrip {
 
     // Value to be assigned in optimization.
     @PlanningVariable(valueRangeProviderRefs = "personRange")
-    private Person driver;
+    public Person driver;
 
      @PlanningVariable(valueRangeProviderRefs = "carRange")
-    private Car car;
+    public Car car;
 
 
 
 
     private SharedTrip() {
+    }
+
+    private SharedTrip(Person driver, Car car) {
+        this.driver = driver;
+        this.car = car;
     }
 
     @Override

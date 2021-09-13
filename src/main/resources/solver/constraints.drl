@@ -52,32 +52,44 @@ end
 +==========+=========+=========+=========+=========+
 |          | Person1 | Person2 | Person3 | Person4 |
 +==========+=========+=========+=========+=========+
-| Monday   |    X    |         |         |         |
+| Car1     |    X    |         |         |         |
 +----------+---------+---------+---------+---------+
-| Tuesday  |         |    X    |         |         |
+| Car2     |         |    X    |         |         |
 +----------+---------+---------+---------+---------+
-| Saturday |         |         |    X    |         |
+| Car3     |         |         |    X    |         |
 +----------+---------+---------+---------+---------+
-| Thursday |         |         |         |    X    |
+| Car4     |         |         |         |    X    |
 +----------+---------+---------+---------+---------+
 https://ozh.github.io/ascii-tables/
 */
 
-rule "Horizontal conflict - More than a driver cant drive the same day"
+rule "Horizontal conflict - A person cant be in a car if reached capacity of car"
 enabled true
 when
+    // Si capacidad del coche es menor que 2 p.e, penaliza
+    $c1: Car()
+    SharedTrip($c1.capacity == 2)
+//    s1: SharedTrip( $car: car == 2)
+//    $p1: Person()
 then
-    System.out.println("------ HORIZONTAL CONFLICT ------");
+    System.out.println("------ HORIZONTAL CONFLICT ------" + $c1);
      scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
 
-
-rule "Vertical conflict - A person cant drive more that once per week"
+rule "Vertical conflict - A person cant be in two cars at the same time"
 enabled true
 when
+    // No puede haber dos viajes con la misma persona
+    SharedTrip($person1: driver, $car1: car)
+    SharedTrip($person2: driver == $person1, $car1: car)
 
 then
 
     System.out.println("------ VERTICAL CONFLICT ------");
+        System.out.println("Misma persona " + $person1 + " en el mismo car" + $car1 + " \n");
+
      scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
+
+
+

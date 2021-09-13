@@ -10,6 +10,7 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -38,24 +39,21 @@ public class CarPersonAllocation {
     public CarPersonAllocation(List<Person> personList, List<Car> carList,
                                List<SharedTrip> sharedTripList) {
         this.personList = personList;
-        // this.carList = carList;
+         this.carList = carList;
         this.sharedTripList = sharedTripList;
     }
 
-//    @Override
-//    public String toString() {
+    @Override
+    public String toString() {
 //        Map<String, List<SharedTrip>> result = sharedTripList.stream().collect(groupingBy(SharedTrip::carUsedInDay));
 //        StringBuilder sb = new StringBuilder();
 //        for (Map.Entry<String, List<SharedTrip>> entry : result.entrySet()) {
 //            SharedTrip title = entry.getValue().get(0);
-//            sb.append("Day of week: ");
-//            sb.append(title.getDayOfWeek());
 //            sb.append(" Car: ");
 //            sb.append(title.getCar());
-//            sb.append(" Passengers: ");
-//            sb.append(entry.getValue().stream().map(i -> i.getDriver().getName()).collect(Collectors.joining(", ")));
 //            sb.append("\n");
 //        }
 //        return sb.toString();
-//    }
+        return "hola";
+    }
 }
