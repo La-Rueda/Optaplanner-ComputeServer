@@ -86,7 +86,8 @@ enabled true
 when
 
     $c1: Car()
-    $s1: SharedTrip($c1.capacity)
+    $p1: Person()
+    $s1: SharedTrip($c1.capacity) // , $p1 not memberOf passengers -> [Patry,Patry,Jesus]
     // Mejorar regla poniendo condicion aqui
 then
 
@@ -94,12 +95,12 @@ then
   System.out.println("Capacity: " + $c1.capacity);
      // Si cabe en el coche p.e, penaliza.
      // Capacidad sin contar al conductor
-    if ( $s1.getPassengers().size() < $c1.capacity - 1 ){
+    if ( $s1.getPassengers().size() < $c1.capacity - 1 && !$s1.passengers.contains($p1)){
          System.out.println("------ ADD PASSENGER ------");
-         System.out.println("New list" + $s1.getPassengers().add($s1.driver));
-        System.out.println("[ " + $c1 + "]Add " + $s1.driver + " as passenger" + $s1.getPassengers());
+         System.out.println("New list" + $s1.getPassengers().add($p1));
+        System.out.println("[ " + $c1 + "]Add " + $p1 + " as passenger" + $s1.getPassengers());
     }else{
-        System.out.println($s1.driver + "No cabe en el coche");
+        System.out.println($p1 + "No cabe en el coche o ya está en el");
         scoreHolder.addHardConstraintMatch(kcontext, -1);
     }
 end

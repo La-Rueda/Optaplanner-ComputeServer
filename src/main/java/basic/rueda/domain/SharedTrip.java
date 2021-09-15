@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
+import basic.rueda.domain.*;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class SharedTrip {
      @PlanningVariable(valueRangeProviderRefs = "carRange")
     public Car car;
 
-    private List<Person> passengers;
+    public List<Person> passengers;
     // ¿Por qué es necesario darle valor a sharedTripList?
 
     private SharedTrip() {
